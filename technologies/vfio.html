@@ -182,29 +182,29 @@
 -->
 <h1 id="binding-devices-to-vfio-driver-to-allow-passthrough"><a class="header" href="#binding-devices-to-vfio-driver-to-allow-passthrough">Binding Devices to VFIO Driver to Allow Passthrough</a></h1>
 <p>An example of binding a PCI device to the VFIO driver manually:</p>
-<pre><code>export DEVICE=&quot;0001:01:00.0&quot;
+<pre><code>export DEVICE="0001:01:00.0"
 export VENDOR_ID=$(cat /sys/bus/pci/devices/$DEVICE/vendor)
 export DEVICE_ID=$(cat /sys/bus/pci/devices/$DEVICE/device)
 
-echo &quot;$DEVICE&quot; &gt; /sys/bus/pci/devices/$DEVICE/driver/unbind
+echo "$DEVICE" &gt; /sys/bus/pci/devices/$DEVICE/driver/unbind
 
-echo &quot;$VENDOR_ID $DEVICE_ID&quot; &gt; /sys/bus/pci/drivers/vfio-pci/new_id
+echo "$VENDOR_ID $DEVICE_ID" &gt; /sys/bus/pci/drivers/vfio-pci/new_id
 </code></pre>
 <p>Similar approach also works for platform devices. The device path for platform
 devices is <code>/sys/bus/platform/devices/$DEVICE/</code>.</p>
-<pre><code>export DEVICE=&quot;31d0000.serial&quot;
+<pre><code>export DEVICE="31d0000.serial"
 echo vfio-platform &gt; /sys/bus/platform/devices/$DEVICE/driver_override
-echo &quot;$DEVICE&quot; &gt; /sys/bus/platform/drivers/vfio-platform/bind
+echo "$DEVICE" &gt; /sys/bus/platform/drivers/vfio-platform/bind
 </code></pre>
 <h2 id="using-driverctl-package"><a class="header" href="#using-driverctl-package">Using driverctl Package</a></h2>
 <p><a href="https://gitlab.com/driverctl/driverctl">driverctl</a> is an open-source device
 driver control utility for Linux systems. With <code>driverctl</code> it is easier to set
 up VFIO or change the driver for a device:</p>
-<pre><code>export DEVICE=&quot;0001:01:00.0&quot;
+<pre><code>export DEVICE="0001:01:00.0"
 driverctl --nosave set-override ${DEVICE} vfio-pci
 </code></pre>
 <p>or for platform bus device passthrough</p>
-<pre><code>export DEVICE=&quot;31d0000.serial&quot;
+<pre><code>export DEVICE="31d0000.serial"
 driverctl --nosave --bus platform set-override ${DEVICE} vfio-platform
 </code></pre>
 <p>It is important to note that by default <code>driverctl</code> stores the set driver
@@ -222,7 +222,7 @@ driverctl --bus platform list-devices
 </code></pre>
 <p>driverctl can also reset the default driver by using the <code>unset-override</code>
 command.</p>
-<pre><code>export DEVICE=&quot;0001:01:00.0&quot;
+<pre><code>export DEVICE="0001:01:00.0"
 driverctl unset-override ${DEVICE}
 </code></pre>
 

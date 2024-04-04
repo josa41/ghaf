@@ -196,15 +196,15 @@
 <p><a href="https://en.wikipedia.org/wiki/Binfmt_misc">binfmt</a> allows running different ISA on a development machine. This is achieved by running the target binary in an emulator such as <code>QEMU</code> or in a VM. So while not cross-compiled it can enable development for some embedded device configurations.</p>
 <p>To enable <code>binfmt</code>, we recommend to set the following in your host systems <code>configuration.nix</code>:</p>
 <pre><code>boot.binfmt.emulatedSystems = [
-  &quot;riscv64-linux&quot;
-  &quot;aarch64-linux&quot;
+  "riscv64-linux"
+  "aarch64-linux"
 ];
 </code></pre>
 <p>In addition, it is recommended to enable KVM support with either</p>
-<pre><code>boot.kernelModules = [ &quot;kvm-amd&quot; ];
+<pre><code>boot.kernelModules = [ "kvm-amd" ];
 </code></pre>
 <p>or</p>
-<pre><code>boot.kernelModules = [ &quot;kvm-intel&quot; ];
+<pre><code>boot.kernelModules = [ "kvm-intel" ];
 </code></pre>
 <p>depending on whether your development host is running AMD or Intel processor.</p>
 

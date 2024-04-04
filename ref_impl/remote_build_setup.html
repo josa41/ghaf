@@ -261,7 +261,7 @@ sudo nano configuration.nix
 </li>
 <li>Add lib in the header like so: <code>{ config, pkgs, lib, ... }:</code>.</li>
 <li>Edit the <code>nix.conf</code> file:
-<pre><code>environment.etc.&quot;nix/nix.conf&quot;.text = lib.mkForce ''
+<pre><code>environment.etc."nix/nix.conf".text = lib.mkForce ''
     # Your custom nix.conf content here
     builders = @/etc/nix/machines
     require-sigs = false
@@ -296,7 +296,7 @@ sudo nano machines
 <ul>
 <li>Parameters inside ‘[ ]’ are optional.</li>
 <li>The ssh-public-key-encoded is the base-64 encoded public key of the remote machine. Get the encoding using:
-<pre><code>echo -n &quot;your_public_key_here&quot; | base64
+<pre><code>echo -n "your_public_key_here" | base64
 </code></pre>
 </li>
 <li>If omitted, SSH will use its regular known_hosts file.</li>
@@ -371,7 +371,7 @@ experimental-features = nix-command flakes
 </ul>
 <p>For more information about Nix security modes, see the <a href="https://nixos.org/manual/nix/stable/installation/nix-security">Security</a> section of the Nix Reference Manual.</p>
 <h3 id="vpn-setup-for-remote-access"><a class="header" href="#vpn-setup-for-remote-access">VPN Setup for Remote Access</a></h3>
-<p>A VPN is needed, if the local machine is not on the same local network as your remote build machine. </p>
+<p>A VPN is needed, if the local machine is not on the same local network as your remote build machine.</p>
 <p>To set up a VPN using <a href="https://www.infradead.org/openconnect/">OpenConnect</a>, do the following:</p>
 <ul>
 <li>Install OpenConnect:</li>

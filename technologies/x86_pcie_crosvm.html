@@ -187,7 +187,7 @@ driver. This can be done manually or by using the <a href="https://gitlab.com/dr
 <blockquote>
 <p>Running driverctl requires root permissions.</p>
 </blockquote>
-<pre><code>export BUS=&quot;0000:01:00.0&quot;
+<pre><code>export BUS="0000:01:00.0"
 driverctl --nosave set-override ${BUS} vfio-pci
 </code></pre>
 <p>Let's consider the example of starting crosvm.</p>
@@ -201,18 +201,18 @@ The device identifier is different when comparing how passthrough devices are
 refrenced in QEMU. Using the <code>guest-address</code> option is not strictly required
 by the source documentation but it gives a bit more control for handling the
 passthrough device on the guest side.</p>
-<pre><code>export BUS=&quot;0000:01:00.0&quot;
-export GUESTBUS=&quot;00:08.0&quot;
+<pre><code>export BUS="0000:01:00.0"
+export GUESTBUS="00:08.0"
 ./target/debug/crosvm run \
         --mem=8192 \
         --block ./ubuntu-22.10.img \
         -i /boot/initrd.img-5.19.0-31-generic /boot/vmlinuz-5.19.0-31-generic \
-        -p &quot;root=/dev/vda2 loglevel=8 earlycon earlyprintk debug&quot; \
+        -p "root=/dev/vda2 loglevel=8 earlycon earlyprintk debug" \
         --vfio /sys/bus/pci/devices/${BUS},guest-address=${GUESTBUS},iommu=viommu
 </code></pre>
 <h2 id="reseting-driver-to-original-state-afterwards"><a class="header" href="#reseting-driver-to-original-state-afterwards">Reseting Driver to Original State Afterwards</a></h2>
 <p>The driverctl tool can reset the original device driver afterward:</p>
-<pre><code>export BUS=&quot;0000:01:00.0&quot;
+<pre><code>export BUS="0000:01:00.0"
 driverctl unset-override ${BUS}
 </code></pre>
 

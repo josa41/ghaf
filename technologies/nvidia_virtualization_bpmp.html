@@ -181,7 +181,7 @@
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 <h1 id="nvidia-jetson-agx-orin-boot-and-power-management-processor-virtualization"><a class="header" href="#nvidia-jetson-agx-orin-boot-and-power-management-processor-virtualization">NVIDIA Jetson AGX Orin: Boot and Power Management Processor Virtualization</a></h1>
-<p>Boot and Power Management Processor (BPMP) is the NVIDIA processor, which is designed for booting process handling and offloading the power management, clock management, and reset control tasks from the CPU. </p>
+<p>Boot and Power Management Processor (BPMP) is the NVIDIA processor, which is designed for booting process handling and offloading the power management, clock management, and reset control tasks from the CPU.</p>
 <p>The BPMP virtualization on the NVIDIA Jetson AGX Orin involves enabling VMs to access specific BPMP resources. This capability is crucial for passing through platform devices where control over resets and clocks configurations is required.</p>
 <h2 id="architectural-overview"><a class="header" href="#architectural-overview">Architectural Overview</a></h2>
 <ul>
@@ -227,7 +227,7 @@ lrwxrwxrwx 1 root root 0 Dec  8 08:26 /sys/bus/platform/drivers/vfio-platform/31
 <p>UARTA is an UART unit with a port A connection. For more information, see <a href="nvidia_agx_pt_uart.html#uart-connections">UART Connections</a>.</p>
 </blockquote>
 <ol>
-<li>Build a guest kernel according to <a href="https://github.com/jpruiz84/bpmp-virt">UARTA passthrough instructions</a><sup class="footnote-reference"><a href="#note">1</a></sup> and use the following script to start the VM:</li>
+<li>Build a guest kernel according to <a href="https://github.com/jpruiz84/bpmp-virt">UARTA passthrough instructions</a>[^note] and use the following script to start the VM:</li>
 </ol>
 <blockquote>
 <p><strong>TIP:</strong> IMG is the kernel image and FS the rootfs.</p>
@@ -246,7 +246,7 @@ qemu-system-aarch64 \
     -net user,hostfwd=tcp::2222-:22 -net nic \
     -device vfio-platform,host=3100000.serial \
     -dtb virt.dtb \
-    -append &quot;rootwait root=/dev/vda console=ttyAMA0&quot;
+    -append "rootwait root=/dev/vda console=ttyAMA0"
 </code></pre>
 <ol start="2">
 <li>With UARTA connected start Minicom on the working machine:</li>
@@ -260,7 +260,7 @@ qemu-system-aarch64 \
 </code></pre>
 <h2 id="related-topics"><a class="header" href="#related-topics">Related Topics</a></h2>
 <p><a href="./nvidia_agx_pt_uart.html#nvidia-jetson-agx-orin-uart-passthrough">NVIDIA Jetson AGX Orin: UART Passthrough</a></p>
-<p><sup class="footnote-reference"><a href="#note">1</a></sup> That documentation is in the <a href="https://github.com/jpruiz84/bpmp-virt">bpmp-virt</a> side repository, as that approach does not use microvm.</p>
+<p>[^note] That documentation is in the <a href="https://github.com/jpruiz84/bpmp-virt">bpmp-virt</a> side repository, as that approach does not use microvm.</p>
 
                     </main>
 

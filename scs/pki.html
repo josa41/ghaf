@@ -190,15 +190,15 @@
 <li>Certificate Management System (CMS) for managing access to stored certificates.</li>
 </ul>
 <h2 id="private-certificate-authority-pca"><a class="header" href="#private-certificate-authority-pca">Private Certificate Authority (PCA)</a></h2>
-<p>PCA enables the creation of private certificate authority hierarchies, consisting of Root and Subordinate CAs. It issues end-entity X.509 certificates, that are used for: </p>
+<p>PCA enables the creation of private certificate authority hierarchies, consisting of Root and Subordinate CAs. It issues end-entity X.509 certificates, that are used for:</p>
 <ul>
 <li>Encrypted TLS communication channels (data encryption in transit)</li>
 <li>Code and image signing</li>
 </ul>
-<p>PCA can be established in the cloud or on-premises. Initially, the OpenSSL-based solution deployed on-premises is assumed, however, some of the target projects might consider using commercial cloud solutions. </p>
+<p>PCA can be established in the cloud or on-premises. Initially, the OpenSSL-based solution deployed on-premises is assumed, however, some of the target projects might consider using commercial cloud solutions.</p>
 <h2 id="hardware-security-module"><a class="header" href="#hardware-security-module">Hardware Security Module</a></h2>
-<p>On-premises solution can be further improved by adding a Hardware Security Module (HSM). It is a physical device for managing cryptographic material such as digital keys. </p>
-<p>HSM can be also used to perform cryptographic operations such as digital signing, encryption, and decryption. The HSM contains one or more Secure Cryptoprocessors that are dedicated microprocessors optimized for carrying out cryptographic operations. </p>
+<p>On-premises solution can be further improved by adding a Hardware Security Module (HSM). It is a physical device for managing cryptographic material such as digital keys.</p>
+<p>HSM can be also used to perform cryptographic operations such as digital signing, encryption, and decryption. The HSM contains one or more Secure Cryptoprocessors that are dedicated microprocessors optimized for carrying out cryptographic operations.</p>
 <p>One example of affordable HSM solutions is YubiHSM developed by Yubico.</p>
 <h3 id="hsm-variants-for-consideration"><a class="header" href="#hsm-variants-for-consideration">HSM Variants for Consideration</a></h3>
 <p>The following HSM solutions are considered for the Ghaf project:</p>
@@ -208,7 +208,7 @@
 <li><a href="https://github.com/opendnssec/SoftHSMv2" title="SoftHSMv2">SoftHSMv2</a></li>
 <li>BreadboardHSM</li>
 </ul>
-<p>The following table provides feature comparison of the proposed solutions: </p>
+<p>The following table provides feature comparison of the proposed solutions:</p>
 <blockquote>
 <p>Since the feature list is quite extensive, the table is limited to the features that are either planned to be used in Ghaf or might benefit the project in the future.</p>
 </blockquote>
@@ -226,9 +226,9 @@
 <tr><td>Price</td><td>650EUR (VAT 0%)</td><td>99 EUR</td><td>FOSS</td><td>HW Costs</td></tr>
 </tbody></table>
 </div>
-<p>YubiHSM2 is the leading solution considering its cryptographic capabilities. However, taking into account quite modest needs of SCS, NitrokeyHSM2 represents an adequate option. </p>
+<p>YubiHSM2 is the leading solution considering its cryptographic capabilities. However, taking into account quite modest needs of SCS, NitrokeyHSM2 represents an adequate option.</p>
 <p>The main benefit of YubiHSM2 from SCS perspective is its native support of EdDSA-curve25519, which is the one that NixOS is using for package signing. Thus YubiHSM2 could be used directly with NixOS. However, as the package doesn't change in transit from the Build System to the Consumer, usage of inbuilt tooling is not always necessary.</p>
-<p>BreadboardHSM solution is based on Microchip ATECC608B (TrustFLEX + cryptoauthlib + gtutls), though development work is still ongoing at the time of writing this document. The SoftHSMv2 and BreadboardHSM are taken for comparison showing what can be achieved using FOSS variants. </p>
+<p>BreadboardHSM solution is based on Microchip ATECC608B (TrustFLEX + cryptoauthlib + gtutls), though development work is still ongoing at the time of writing this document. The SoftHSMv2 and BreadboardHSM are taken for comparison showing what can be achieved using FOSS variants.</p>
 <h2 id="ca-hierarchy-options"><a class="header" href="#ca-hierarchy-options">CA Hierarchy Options</a></h2>
 <p>CA usually consists of:</p>
 <ul>
@@ -237,7 +237,7 @@
 </ul>
 <p>There are three types of hierarchies: one-tier, two-tier, and three-tier. The hierarchy can be chosen based on the target project's needs and complexity. A one-tier hierarchy is not considered for any production usage due to the low security, as the compromise of a single CA leads to a compromise of the entire PKI.</p>
 <p>In a two-tier hierarchy, the Root CA and issuing (Subordinate) CAs are separated for increasing the security level. This is the simplest production level hierarchy allowing to keep Root CA at the most secure and restrictive levels, yet making subordinate CA access slightly more permissive. This hierarchy is most likely sufficient for most of the target projects.</p>
-<p>In a three-tier CA, an intermediate CA is placed between the Root CA and the Subordinate (issuing) CA. This is done to separate the Root CA from low-level CA operations. The middle layer (intermediate CA) is only used to sign Subordinate CAs that issue the end-entity certificates. </p>
+<p>In a three-tier CA, an intermediate CA is placed between the Root CA and the Subordinate (issuing) CA. This is done to separate the Root CA from low-level CA operations. The middle layer (intermediate CA) is only used to sign Subordinate CAs that issue the end-entity certificates.</p>
 <h2 id="proposed-ca-hierarchy"><a class="header" href="#proposed-ca-hierarchy">Proposed CA Hierarchy</a></h2>
 <p>The following diagram describes the proposed CA for the SCS. The three-tier CA is chosen based on the high-security level and the potential need to scale it to several projects, later on, keeping the main control under the same Root CA.</p>
 <p><img src="../img/ca_implementation.drawio.png" alt="Proposed CA" title="CA Implementation Proposal" /></p>

@@ -228,20 +228,20 @@ devtmpfs.mount=0 stage2init=/nix/store/0mbhpna8hplbsaz1il3n99f0zincr4vs-nixos-sy
 sock,server,nowait' '-device' 'virtio-balloon' '--option 1 --option 2'
 </code></pre>
 <p>for the input parameters:</p>
-<pre><code>microvm.hypervisor = &quot;qemu&quot;;
+<pre><code>microvm.hypervisor = "qemu";
 </code></pre>
 <p>Note that microvm sets several others.</p>
 <pre><code>microvm.mem = 2000;
 microvm.balloonMem = 512;
 microvm.vcpu = 17;
-microvm.qemu.extraArgs = [ &quot;--option 1 --option 2&quot; ];
+microvm.qemu.extraArgs = [ "--option 1 --option 2" ];
 </code></pre>
 <h3 id="adding-option-to-hypervisor-command-line"><a class="header" href="#adding-option-to-hypervisor-command-line">Adding Option to Hypervisor Command Line</a></h3>
 <p>microvm may not supply parameters for all possible options as adding specific devices. Processing of all microvm configuration options is done in the mentioned above hypervisor’s runner .nix file.</p>
 <p>The runners support the <code>extraArgs</code> parameter. It allows setting any option in QEMU command line invocation. Its value is a list of strings. In this example the following <code>extraArgs</code> definition:</p>
 <pre><code>microvm.qemu.extraArgs = [
-&quot;-object memory-backend-file,id=mem1,mem-path=/dev/shm/virtio_pmem.img&quot;
-&quot;-device virtio-pmem-pci,memdev=mem1,id=nv1&quot;
+"-object memory-backend-file,id=mem1,mem-path=/dev/shm/virtio_pmem.img"
+"-device virtio-pmem-pci,memdev=mem1,id=nv1"
 ];
 </code></pre>
 <p>results in the generated command line parameters:</p>

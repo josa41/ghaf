@@ -197,22 +197,22 @@
 #
 # Generic x86_64 computer -target
 {
-  deviceName = &quot;lenovo-t14&quot;;
-  networkPciAddr = &quot;0000:00:14.3&quot;;
-  networkPciVid = &quot;8086&quot;;
-  networkPciPid = &quot;02f0&quot;;
-  gpuPciAddr = &quot;0000:00:02.0&quot;;
-  gpuPciVid = &quot;8086&quot;;
-  gpuPciPid = &quot;9b41&quot;;
-  usbInputVid = &quot;046d&quot;;
-  usbInputPid = &quot;c52b&quot;;
+  deviceName = "lenovo-t14";
+  networkPciAddr = "0000:00:14.3";
+  networkPciVid = "8086";
+  networkPciPid = "02f0";
+  gpuPciAddr = "0000:00:02.0";
+  gpuPciVid = "8086";
+  gpuPciPid = "9b41";
+  usbInputVid = "046d";
+  usbInputPid = "c52b";
 }
 </code></pre>
 <p>The fields of that structure are self-explanatory. Use the <code>lspci -nnk</code> command to get this data from any Linux OS running on the device.</p>
 <h2 id="troubleshooting-for-lenovo-x1-laptop"><a class="header" href="#troubleshooting-for-lenovo-x1-laptop">Troubleshooting for Lenovo X1 Laptop</a></h2>
 <p>If after booting you see a black screen, try the following to detect the issue:</p>
 <ol>
-<li>Add a Wi-Fi network name and password to the <em>lenovo-x1-carbon.nix</em> file instead of <code>#networks.&quot;ssid&quot;.psk = &quot;psk&quot;</code>.</li>
+<li>Add a Wi-Fi network name and password to the <em>lenovo-x1-carbon.nix</em> file instead of <code>#networks."ssid".psk = "psk"</code>.</li>
 <li>Build and run the image. For more information, see <a href="./build_and_run.html#running-ghaf-image-for-lenovo-x1">Running Ghaf Image for Lenovo X1</a>.</li>
 <li>Identify an IP address by a MAC address with the <code>arp</code> command. If a MAC address is unknown, you can boot into the NixOS image or any other OS to find it, or try the latest addresses that <code>arp</code> returns.</li>
 <li>Connect using SSH (login/password ghaf/ghaf). Then connect from netvm to the host using <code>ssh 192.168.101.2</code> (login/password ghaf/ghaf).</li>

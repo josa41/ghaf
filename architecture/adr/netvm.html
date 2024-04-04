@@ -209,7 +209,7 @@
 </li>
 </ul>
 <p>For common reference hardware with platform NIC, the configured modules for network interface passthrough are provided. For more information, see <a href="https://tiiuae.github.io/ghaf/research/passthrough/ethernet.html">i.MX 8QM Ethernet Passthrough</a>.</p>
-<p>Details of other network components, such as default firewall rules, DHCP (static and dynamic client addresses), routing, reverse proxies and security monitoring are to be described in their respective architecture decision records. In this context, these are illustrated in the context diagram on the right side of the <em>netvm</em> network interface driver. </p>
+<p>Details of other network components, such as default firewall rules, DHCP (static and dynamic client addresses), routing, reverse proxies and security monitoring are to be described in their respective architecture decision records. In this context, these are illustrated in the context diagram on the right side of the <em>netvm</em> network interface driver.</p>
 <h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
 <p>Isolating the attack surface from the host to networking-specific guest VM makes it easier to protect the critical host system from compromise. The isolation also makes it easier to deploy further security, such as a zero trust policy engine or intrusion detection system (IDS).</p>
 <p>Isolation makes configuration and comprehension of the system more difficult.</p>

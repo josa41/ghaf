@@ -176,7 +176,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <!--
+                         <!--
     Copyright 2022-2024 TII (SSRC) and the Ghaf contributors
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
@@ -220,7 +220,7 @@
  * iommu group definition.
  * This is to remove the pci bus from vfio group which
  * leaves the m2 pci device alone in the group.
- * This change is for the m2 pci-e &quot;wifi&quot; slot.
+ * This change is for the m2 pci-e "wifi" slot.
   */
 &amp;pcie_c1_rp {
     /delete-property/ iommus;
@@ -241,13 +241,13 @@
 <p>To set up the device for VFIO, unload the device driver and then replac it with the <code>vfio-pci</code> driver.</p>
 <p>The example below can be used for a device in the PCI bus <code>0001</code>.<br />
 The device <code>0001:01:00.0</code> in the first bus is the Jetson AGX Orin board with the M.2 Wi-Fi card. The full size PCI bus id is <code>0005</code>. It is possible that a single PCI card contains multiple devices. In that case, all the devices need to be passed through together as they are in the same VFIO group. Usually the graphics card also contains some sound output device as a separate device.</p>
-<pre><code>export DEVICE=&quot;0001:01:00.0&quot;
+<pre><code>export DEVICE="0001:01:00.0"
 export VENDOR_ID=$(cat /sys/bus/pci/devices/$DEVICE/vendor)
 export DEVICE_ID=$(cat /sys/bus/pci/devices/$DEVICE/device)
 
-echo &quot;$DEVICE&quot; &gt; /sys/bus/pci/devices/$DEVICE/driver/unbind
+echo "$DEVICE" &gt; /sys/bus/pci/devices/$DEVICE/driver/unbind
 
-echo &quot;$VENDOR_ID $DEVICE_ID&quot; &gt; /sys/bus/pci/drivers/vfio-pci/new_id
+echo "$VENDOR_ID $DEVICE_ID" &gt; /sys/bus/pci/drivers/vfio-pci/new_id
 </code></pre>
 <p>In case of success, this device is bound to VFIO. The VFIO nodes are usually owned by the root and in some cases may be group accessible by the VFIO group. To use the VFIO devices, the user who starts QEMU needs access to the VFIO device node:</p>
 <pre><code># List of vfio device &lt;id&gt; nodes
@@ -264,7 +264,7 @@ ls /sys/kernel/iommu_groups/&lt;id&gt;/devices/
 </blockquote>
 <p>The QEMU command line argument for passthrough uses the PCIe device ID as identifier for the devices. Each
 device which is passed through needs its own QEMU <code>-device</code> argument as below:</p>
-<pre><code>-device vfio-pci,host=&quot;0001:01:00.0&quot;
+<pre><code>-device vfio-pci,host="0001:01:00.0"
 </code></pre>
 <h3 id="arm64-pci-device-interrupts"><a class="header" href="#arm64-pci-device-interrupts">ARM64 PCI Device Interrupts</a></h3>
 <p>Modern PCI devices use the Message Signaled Interrupts (MSI) method to limit the need for physical hardware interrupt pins. As passing through PCI or any other devices is fairly new to QEMU, it seems MSI in ARM64 is not supported by QEMU <sup class="footnote-reference"><a href="#note2">2</a></sup>.</p>
@@ -283,7 +283,7 @@ device which is passed through needs its own QEMU <code>-device</code> argument 
     -kernel Image \
     -drive file=focal-server-cloudimg-arm64.raw,if=virtio,format=raw \
     -device vfio-pci,host=0001:01:00.0\
-    -append &quot;rootwait root=/dev/vda1 console=ttyAMA0 pci=nomsi&quot;
+    -append "rootwait root=/dev/vda1 console=ttyAMA0 pci=nomsi"
 </code></pre>
 <h3 id="more-work-for-arm64"><a class="header" href="#more-work-for-arm64">More Work for ARM64</a></h3>
 <p>The information above is enough for x86 and also for ARM64 processor architecture when using some simple or a bit older PCIe devices. A bit more complex PCIe device which has a larger internal RAM pool needs some modifications with QEMU sources.</p>

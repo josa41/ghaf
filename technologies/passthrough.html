@@ -181,7 +181,7 @@
     SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 <h1 id="devices-passthrough"><a class="header" href="#devices-passthrough">Devices Passthrough</a></h1>
-<p>Devices passthrough to virtual machines (VM) allows us to isolate the device drivers 
+<p>Devices passthrough to virtual machines (VM) allows us to isolate the device drivers
 and their memory access in one or several VMs. This reduces the Trusted Code Base (TCB) in the host, due to the passed-through device drivers can be removed completely from the host kernel.</p>
 <p>Whether the device platform is x86 or ARM, the passthrough device needs to be bound to the VFIO device driver by the host system before it can be passed through to the guest environment. For more information, see <a href="vfio.html">Binding Device to VFIO Driver</a>.</p>
 <p>Our current supported passthrough devices implementations:</p>

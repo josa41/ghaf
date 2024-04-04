@@ -216,13 +216,13 @@
 <p>Only two UART units are connected to the micro USB debug interface. The UART7 is not connected by default but it can be connected to the debug interface ttyACM1 by swapping the fuse resistors (see Debug MCU page 7 on P3737_A04_Concept_schematics.pdf <sup class="footnote-reference"><a href="#note3">3</a></sup>).</p>
 </blockquote>
 <h2 id="uarti-selected-for-passthrough"><a class="header" href="#uarti-selected-for-passthrough">UARTI Selected for Passthrough</a></h2>
-<p>The UARTI unit was selected to do the first &quot;Hello world&quot; passthrough implementation as it does not show any dependencies on its device tree:</p>
+<p>The UARTI unit was selected to do the first "Hello world" passthrough implementation as it does not show any dependencies on its device tree:</p>
 <pre><code class="language-cpp">	uarti: serial@31d0000 {
-		compatible = &quot;arm,sbsa-uart&quot;;
+		compatible = "arm,sbsa-uart";
 		reg = &lt;0x0 0x31d0000 0x0 0x10000&gt;;
 		interrupts = &lt;0x0 TEGRA234_IRQ_UARTI 0x04&gt;;
 		current-speed = &lt;115200&gt;;
-		status = &quot;disabled&quot;;
+		status = "disabled";
 	};
 </code></pre>
 <h2 id="host-device-tree"><a class="header" href="#host-device-tree">Host Device Tree</a></h2>
@@ -235,12 +235,12 @@
 <li><strong>iommus:</strong> add the iommus field with the test stream ID <em>TEGRA_SID_NISO1_SMMU_TEST</em> which by default is not used by any other device.</li>
 </ul>
 <pre><code class="language-cpp">	uarti: serial@31d0000 {
-		compatible = &quot;arm,dummy&quot;;
+		compatible = "arm,dummy";
 		iommus = &lt;&amp;smmu_niso0 TEGRA_SID_NISO1_SMMU_TEST&gt;;
 		reg = &lt;0x0 0x31d0000 0x0 0x10000&gt;;
 		interrupts = &lt;0x0 TEGRA234_IRQ_UARTI 0x04&gt;;
 		current-speed = &lt;115200&gt;;
-		status = &quot;disabled&quot;;
+		status = "disabled";
 	};
 </code></pre>
 </li>
@@ -262,14 +262,14 @@ dd if=./arch/arm64/boot/dts/nvidia/tegra234-p3701-0000-p3737-0000.dtb of=/dev/mm
 		ranges = &lt;0xc000000 0x00 0xc000000 0x2000000&gt;;
 		#address-cells = &lt;0x01&gt;;
 		#size-cells = &lt;0x01&gt;;
-		compatible = &quot;qemu,platform\0simple-bus&quot;;
+		compatible = "qemu,platform\0simple-bus";
 
 		uarti: serial@c000000 {
-		    compatible = &quot;arm,sbsa-uart&quot;;
+		    compatible = "arm,sbsa-uart";
 		    current-speed = &lt;0x1c200&gt;;
 		    interrupts = &lt;0x00 0x70 0x04&gt;;
 		    reg = &lt;0x0c000000 0x10000&gt;;
-		    status = &quot;okay&quot;;
+		    status = "okay";
         	};
 	};
 </code></pre>
@@ -303,7 +303,7 @@ echo 31d0000.serial &gt; /sys/bus/platform/drivers/vfio-platform/bind
     -drive file=focal-server-cloudimg-arm64.raw,if=virtio,format=raw \
     -device vfio-platform,host=31d0000.serial\
     -dtb uart.dtb \
-    -append &quot;rootwait root=/dev/vda1 console=ttyAMA0&quot;
+    -append "rootwait root=/dev/vda1 console=ttyAMA0"
 </code></pre>
 </li>
 </ol>
