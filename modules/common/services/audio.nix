@@ -40,8 +40,14 @@ in
             {
               name = "libpipewire-module-protocol-pulse";
               args = {
-                # Enable TCP socket for VMs pulseaudio clients
-                "server.address" = [ "tcp:4713" ];
+                "server.address" = [
+                  {
+                    "address" = "tcp:0.0.0.0:${toString cfg.pulseaudioTcpPort}";
+                    "max-clients" = "64";
+                    "listen-backlog" = "32";
+                    "client.access" = "unrestricted";
+                  }
+                ];
                 "pulse.min.req" = "128/48000"; # 2.7ms
                 "pulse.default.req" = "960/48000"; # 20 milliseconds
                 "pulse.min.frag" = "128/48000"; # 2.7ms

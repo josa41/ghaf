@@ -84,6 +84,7 @@ let
               (rmDesktopEntries [
                 pkgs.waypipe
                 pkgs.networkmanagerapplet
+                pkgs.myxer
               ])
               ++ [
                 pkgs.nm-launcher
@@ -91,7 +92,10 @@ let
               ]
               ++ (lib.optional (
                 config.ghaf.profiles.debug.enable && config.ghaf.virtualization.microvm.idsvm.mitmproxy.enable
-              ) pkgs.mitmweb-ui);
+              ) pkgs.mitmweb-ui)
+              ++ (lib.optional (
+                config.ghaf.virtualization.microvm.audiovm.enable
+              ) pkgs.myxer-launcher);
           };
 
           time.timeZone = config.time.timeZone;

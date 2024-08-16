@@ -20,4 +20,5 @@
   mitmweb-ui = final.callPackage ../../packages/mitmweb-ui { };
   gtklock = import ./gtklock { inherit prev; };
   hardware-scan = final.callPackage ../../packages/hardware-scan { };
+  myxer-launcher = final.callPackage ../../packages/myxer-launcher { };
 })

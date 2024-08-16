@@ -123,6 +123,12 @@ in
             }
 
             {
+              name = "Myxer Audio Control";
+              path = "${pkgs.myxer-launcher}/bin/myxer-launcher";
+              icon = "${pkgs.icon-pack}/preferences-sound.svg";
+            }
+
+            {
               name = "Shutdown";
               path = "${powerControl.makePowerOffCommand {
                 inherit hostAddress;
