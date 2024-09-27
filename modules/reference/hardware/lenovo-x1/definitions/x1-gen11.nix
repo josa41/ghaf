@@ -123,7 +123,8 @@
       }
     ];
     kernelConfig.kernelParams = [
-      "snd_intel_dspcfg.dsp_driver=3"
+      "snd-sof-pci.sof_pci_debug=1"
+      "snd_intel_dspcfg.dsp_driver=0"
       "snd_sof_intel_hda_common.dmic_num=4"
     ];
   };

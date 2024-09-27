@@ -24,6 +24,11 @@ in
       default = 4713;
       description = "TCP port used by Pipewire-pulseaudio service";
     };
+    pulseaudioControlPort = mkOption {
+      type = types.int;
+      default = 4714;
+      description = "TCP port used by Pipewire-pulseaudio control service";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -36,7 +41,7 @@ in
       alsa.enable = config.ghaf.development.debug.tools.enable;
       systemWide = true;
       extraConfig = {
-        pipewire."10-remote-simple" = {
+        pipewire."10-remote-pulse-audio" = {
           "context.modules" = [
             {
               name = "libpipewire-module-protocol-pulse";
@@ -45,6 +50,25 @@ in
                 "server.address" = [
                   {
                     address = "tcp:0.0.0.0:${toString cfg.pulseaudioTcpPort}";
+                    "client.access" = "restricted";
+                  }
+                ];
+                "pulse.min.req" = "1024/48000";
+                "pulse.min.quantum" = "1024/48000";
+                "pulse.idle.timeout" = "3";
+              };
+            }
+          ];
+        };
+        pipewire."10-remote-pulse-control" = {
+          "context.modules" = [
+            {
+              name = "libpipewire-module-protocol-pulse";
+              args = {
+                # Enable TCP socket for VMs pulseaudio clients
+                "server.address" = [
+                  {
+                    address = "tcp:0.0.0.0:${toString cfg.pulseaudioControlPort}";
                     "client.access" = "unrestricted";
                   }
                 ];
@@ -75,6 +99,6 @@ in
     systemd.services.pipewire.wantedBy = [ "multi-user.target" ];
 
     # Open TCP port for the pipewire pulseaudio socket
-    networking.firewall.allowedTCPPorts = [ cfg.pulseaudioTcpPort ];
+    networking.firewall.allowedTCPPorts = [ cfg.pulseaudioTcpPort cfg.pulseaudioControlPort ];
   };
 }

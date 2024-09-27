@@ -8,7 +8,7 @@ writeShellApplication {
   name = "audio-ctrl";
   runtimeInputs = [ pamixer ];
   text = ''
-    export PULSE_SERVER=audio-vm:4713
+    export PULSE_SERVER=audio-vm:4714
 
     case "$1" in
       inc)
