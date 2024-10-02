@@ -127,7 +127,7 @@ let
                 pkgs.sticky-notes
               ])
               ++ [
-                pkgs.nm-launcher
+                (pkgs.nm-launcher.override { inherit (config.ghaf.users.accounts) uid; })
                 pkgs.bt-launcher
                 pkgs.pamixer
                 pkgs.eww
