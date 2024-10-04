@@ -693,6 +693,10 @@ list of (submodule)</p>
     colour = "#4c3f7a";
     identifier = "AppFlowy";
   }
+  {
+    colour = "#353535";
+    identifier = "org.gnome.TextEditor";
+  }
 ]
 </code></pre>
 <p><em>Declared by:</em></p>
@@ -724,7 +728,7 @@ string</p>
 <p><em>Type:</em>
 path</p>
 <p><em>Default:</em>
-<code>"/nix/store/crfm19lrc2rw4aw5hn504fq31hax2lbc-ghaf-artwork-0.1.0/ghaf-wallpaper.png"</code></p>
+<code>"/nix/store/37g58yqczz4ckl34dgq5s5dgknyl3dpn-ghaf-artwork-0.1.0/ghaf-wallpaper.png"</code></p>
 <p><em>Declared by:</em></p>
 <ul>
 <li><a href="https://github.com/tiiuae/ghaf/blob/main/modules/desktop/graphics/labwc.nix">https://github.com/tiiuae/ghaf/blob/main/modules/desktop/graphics/labwc.nix</a></li>
@@ -1776,7 +1780,6 @@ list of (attribute set)</p>
       {
         class = 8;
         description = "Mass Storage - SCSI (USB drives)";
-        disable = true;
         sublass = 6;
       }
     ];
@@ -2642,6 +2645,28 @@ boolean</p>
 <ul>
 <li><a href="https://github.com/tiiuae/ghaf/blob/main/modules/common/services/desktop.nix">https://github.com/tiiuae/ghaf/blob/main/modules/common/services/desktop.nix</a></li>
 </ul>
+<h2 id="ghafservicesdisksenable"><a class="header" href="#ghafservicesdisksenable">ghaf.services.disks.enable</a></h2>
+<p>Whether to enable Enable disk mount daemon.</p>
+<p><em>Type:</em>
+boolean</p>
+<p><em>Default:</em>
+<code>false</code></p>
+<p><em>Example:</em>
+<code>true</code></p>
+<p><em>Declared by:</em></p>
+<ul>
+<li><a href="https://github.com/tiiuae/ghaf/blob/main/modules/common/services/disks.nix">https://github.com/tiiuae/ghaf/blob/main/modules/common/services/disks.nix</a></li>
+</ul>
+<h2 id="ghafservicesdisksfilemanager"><a class="header" href="#ghafservicesdisksfilemanager">ghaf.services.disks.fileManager</a></h2>
+<p>The program to open mounted directories</p>
+<p><em>Type:</em>
+string</p>
+<p><em>Default:</em>
+<code>"xdg-open"</code></p>
+<p><em>Declared by:</em></p>
+<ul>
+<li><a href="https://github.com/tiiuae/ghaf/blob/main/modules/common/services/disks.nix">https://github.com/tiiuae/ghaf/blob/main/modules/common/services/disks.nix</a></li>
+</ul>
 <h2 id="ghafservicesfirmwareenable"><a class="header" href="#ghafservicesfirmwareenable">ghaf.services.firmware.enable</a></h2>
 <p>Whether to enable PLaceholder for firmware handling.</p>
 <p><em>Type:</em>
@@ -3146,6 +3171,18 @@ unspecified value</p>
 <ul>
 <li><a href="https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm">https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm</a></li>
 </ul>
+<h2 id="ghafvirtualizationmicrovmappvmvmsghafaudioenable"><a class="header" href="#ghafvirtualizationmicrovmappvmvmsghafaudioenable">ghaf.virtualization.microvm.appvm.vms.*.ghafAudio.enable</a></h2>
+<p>Whether to enable Ghaf application audio support.</p>
+<p><em>Type:</em>
+boolean</p>
+<p><em>Default:</em>
+<code>false</code></p>
+<p><em>Example:</em>
+<code>true</code></p>
+<p><em>Declared by:</em></p>
+<ul>
+<li><a href="https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm">https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm</a></li>
+</ul>
 <h2 id="ghafvirtualizationmicrovmappvmvmsmacaddress"><a class="header" href="#ghafvirtualizationmicrovmappvmvmsmacaddress">ghaf.virtualization.microvm.appvm.vms.*.macAddress</a></h2>
 <p>AppVM’s network interface MAC address</p>
 <p><em>Type:</em>
@@ -3376,6 +3413,28 @@ boolean</p>
 <code>false</code></p>
 <p><em>Example:</em>
 <code>true</code></p>
+<p><em>Declared by:</em></p>
+<ul>
+<li><a href="https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm">https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm</a></li>
+</ul>
+<h2 id="ghafvirtualizationmicrovm-hostsharedvmdirectoryenable"><a class="header" href="#ghafvirtualizationmicrovm-hostsharedvmdirectoryenable">ghaf.virtualization.microvm-host.sharedVmDirectory.enable</a></h2>
+<p>Whether to enable shared directory.</p>
+<p><em>Type:</em>
+boolean</p>
+<p><em>Default:</em>
+<code>true</code></p>
+<p><em>Example:</em>
+<code>true</code></p>
+<p><em>Declared by:</em></p>
+<ul>
+<li><a href="https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm">https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm</a></li>
+</ul>
+<h2 id="ghafvirtualizationmicrovm-hostsharedvmdirectoryvms"><a class="header" href="#ghafvirtualizationmicrovm-hostsharedvmdirectoryvms">ghaf.virtualization.microvm-host.sharedVmDirectory.vms</a></h2>
+<p>List of names of virtual machines for which unsafe shared folder will be enabled.</p>
+<p><em>Type:</em>
+list of string</p>
+<p><em>Default:</em>
+<code>[ ]</code></p>
 <p><em>Declared by:</em></p>
 <ul>
 <li><a href="https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm">https://github.com/tiiuae/ghaf/blob/main/flake.nix#nixosModules.microvm</a></li>
