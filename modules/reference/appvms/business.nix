@@ -195,5 +195,6 @@ in
   ];
   borderColor = "#218838";
   ghafAudio.enable = true;
+  ghafAudio.useTunneling = true;
   vtpm.enable = true;
 }
