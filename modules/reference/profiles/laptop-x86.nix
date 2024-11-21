@@ -133,6 +133,11 @@ in
           port = 9999;
         };
       };
+
+      shm = {
+        enable = true;
+        vms_enabled = [ "gui-vm" "chromium-vm" ];
+      };
     };
   };
 }

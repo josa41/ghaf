@@ -212,7 +212,7 @@ in
                     systemd.user.services.memsocket =
                       if vmName == "gui-vm" then
                         {
-                          enable = true;
+                          enable = false;
                           description = "memsocket";
                           after = [ "labwc.service" ];
                           serviceConfig = {
@@ -229,7 +229,7 @@ in
                           vmIndex = lists.findFirstIndex (vm: vm == vmName) null cfg.vms_enabled;
                         in
                         {
-                          enable = true;
+                          enable = false;
                           description = "memsocket";
                           serviceConfig = {
                             Type = "simple";
