@@ -213,38 +213,73 @@ in
                     environment.systemPackages = [
                       memsocket
                     ];
-                    systemd.user.services.memsocket =
+                    systemd.user.services.memsocket-gui =
                       if vmName == "gui-vm" then
                         {
-                          enable = true;
+                          enable = false;
                           description = "memsocket";
                           after = [ "labwc.service" ];
                           serviceConfig = {
                             Type = "simple";
                             # option '-l -1': listen to all slots. If you want to run other servers
                             # for some slots, provide a list of handled slots, e.g.: '-l 1,3,5'
-                            ExecStart = "${memsocket}/bin/memsocket -s ${cfg.serverSocketPath} -l -1";
+                            ExecStart = "${memsocket}/bin/memsocket -s ${cfg.serverSocketPath} -l 2,3";
                             Restart = "always";
                             RestartSec = "1";
                           };
                           wantedBy = [ "ghaf-session.target" ];
                         }
-                      else
-                        # machines connecting to gui-vm
-                        let
-                          vmIndex = lists.findFirstIndex (vm: vm == vmName) null cfg.vms_enabled;
-                        in
-                        {
-                          enable = true;
-                          description = "memsocket";
-                          serviceConfig = {
-                            Type = "simple";
-                            ExecStart = "${memsocket}/bin/memsocket -c ${cfg.clientSocketPath} ${builtins.toString vmIndex}";
-                            Restart = "always";
-                            RestartSec = "1";
+                        else
+                          # machines connecting to gui-vm
+                          let
+                            vmIndex = lists.findFirstIndex (vm: vm == vmName) null cfg.vms_enabled;
+                          in
+                          {
+                            enable = true;
+                            description = "memsocket";
+                            serviceConfig = {
+                              Type = "simple";
+                              ExecStart = "${memsocket}/bin/memsocket -c ${cfg.clientSocketPath} ${builtins.toString vmIndex}";
+                              Restart = "always";
+                              RestartSec = "1";
+                            };
+                            wantedBy = [ "default.target" ];
                           };
-                          wantedBy = [ "default.target" ];
-                        };
+
+                    systemd.user.services.memsocket-audio =
+                          if vmName == "audio-vm" then
+                          {
+                            enable = true;
+                            description = "memsocket";
+                            #after = [ "pipewire.service" "pipewire.socket" ];
+                            # requires = [ "pipewire.service" "pipewire.socket" ];
+                            serviceConfig = {
+                              Type = "simple";
+                              # option '-l -1': listen to all slots. If you want to run other servers
+                              # for some slots, provide a list of handled slots, e.g.: '-l 1,3,5'
+                              ExecStart = "${memsocket}/bin/memsocket -s /tmp/remote.sock -l 2,3";
+                              Restart = "always";
+                              RestartSec = "1";
+                              ExecStartPre = "/bin/sh -c 'sleep 2'";
+                            };
+                            wantedBy = [ "default.target" ];
+                          }
+                        else
+                          # machines connecting to gui-vm
+                          let
+                            vmIndex = lists.findFirstIndex (vm: vm == vmName) null cfg.vms_enabled;
+                          in
+                          {
+                            enable = true;
+                            description = "memsocket";
+                            serviceConfig = {
+                              Type = "simple";
+                              ExecStart = "${memsocket}/bin/memsocket -c /tmp/pulseaudio.sock ${builtins.toString vmIndex}";
+                              Restart = "always";
+                              RestartSec = "1";
+                            };
+                            wantedBy = [ "default.target" ];
+                          };
                   };
                 };
               };
@@ -254,6 +289,9 @@ in
       }
       {
         microvm.vms.gui-vm.config.config.boot.kernelParams = [
+          "kvm_ivshmem.flataddr=${cfg.flataddr}"
+        ];
+        microvm.vms.audio-vm.config.config.boot.kernelParams = [
           "kvm_ivshmem.flataddr=${cfg.flataddr}"
         ];
       }

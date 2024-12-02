@@ -49,13 +49,23 @@ in
                 # Enable TCP socket for VMs pulseaudio clients
                 "server.address" = [
                   {
-                    address = "tcp:0.0.0.0:${toString cfg.pulseaudioTcpPort}";
+                    #address = "tcp:0.0.0.0:${toString cfg.pulseaudioTcpPort}";
+                    address = "unix:/tmp/remote.sock";
                     "client.access" = "restricted";
                   }
                 ];
-                "pulse.min.req" = "1024/48000";
-                "pulse.min.quantum" = "1024/48000";
-                "pulse.idle.timeout" = "3";
+                # Playback
+                "pulse.min.req" = "256/48000"; # ~5ms min packet size
+                "pulse.default.req" = "1024/48000"; # 22ms packet size
+                "pulse.default.tlength" = "24000/48000"; #500ms buffer
+
+                # Recording
+                "pulse.min.frag" = "1024/48000"; # 22ms packet size
+                "pulse.default.frag" = "12000/48000"; # 250ms
+
+                # Min client buffer
+                "pulse.min.quantum" = "4096/48000";
+                "pulse.idle.timeout" = "1";
               };
             }
             {

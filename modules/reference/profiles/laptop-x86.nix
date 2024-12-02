@@ -123,6 +123,15 @@ in
         applications.enable = false;
       };
 
+      shm = {
+        enable = true;
+        display = true;
+#        memSize = 16;
+#        serverSocketPath = "/tmp/remote.sock";
+#        clientSocketPath = "/tmp/pulseaudio.sock";
+        vms_enabled = [ "gui-vm" "audio-vm" "chrome-vm" "business-vm" ];
+      };
+
       # Logging configuration
       logging = {
         client = {

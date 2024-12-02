@@ -10,7 +10,8 @@ let
   cfg = config.ghaf.ghaf-audio;
   audiovmHost = "audio-vm";
   audiovmPort = config.ghaf.services.audio.pulseaudioTcpPort;
-  address = "tcp:${audiovmHost}:${toString audiovmPort}";
+  # address = "tcp:${audiovmHost}:${toString audiovmPort}";
+  address = "unix:/tmp/pulseaudio.sock";
   reconnectMs = 1000;
 in
 {
